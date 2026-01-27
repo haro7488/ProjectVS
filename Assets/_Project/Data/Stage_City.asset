@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e7ae23fb2ca21b489f3152517cc8284, type: 3}
+  m_Name: Stage_City
+  m_EditorClassIdentifier: 
+  Id: city
+  DisplayName: "\uB3C4\uC2DC \uC678\uACFD"
+  Description: 
+  Thumbnail: {fileID: 0}
+  MapPrefab: {fileID: 0}
+  MapSize: {x: 50, y: 50}
+  BackgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  Duration: 300
+  Waves: []
+  BossSpawns: []
+  DifficultyMultiplier: 1
+  EnemyHealthGrowth: 0.05
+  EnemyDamageGrowth: 0.03
+  IsUnlockedByDefault: 1
+  UnlockConditionDescription: 

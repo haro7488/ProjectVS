@@ -5,7 +5,9 @@
         "Vs.Utility",
         "Vs.Core",
         "Vs.Data",
-        "Vs.Combat"
+        "Vs.Combat",
+        "Vs.Progression",
+        "Vs.Enemy"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

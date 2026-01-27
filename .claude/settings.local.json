@@ -1,32 +1,4 @@
 {
-  "permissions": {
-    "allow": [
-      "mcp__plugin_serena_serena__get_current_config",
-      "mcp__plugin_serena_serena__activate_project",
-      "mcp__plugin_serena_serena__check_onboarding_performed",
-      "mcp__plugin_serena_serena__onboarding",
-      "mcp__plugin_serena_serena__list_dir",
-      "mcp__plugin_serena_serena__read_file",
-      "mcp__plugin_serena_serena__write_memory",
-      "Bash(git commit --amend -m \"$\\(cat <<''EOF''\nAdd Claude Code unity-csharp template\n\n- CLAUDE.md 프로젝트 규칙 \\(Vs 네임스페이스/어셈블리\\)\n- 서브에이전트 위임 전략 \\(분석/설계/구현/리뷰 opus\\)\n- skills: explore, implement, document 프로토콜\n- commands: analyze, impl, review, unity-log\n- hooks: format-cs.ps1 \\(C# 포맷팅\\)\n- MULTI_SESSION.md 멀티세션 규칙\n- Docs/Design/PREFAB_BUILDER_GUIDELINES.md\nEOF\n\\)\")",
-      "Bash(powershell:*)",
-      "Bash(where:*)",
-      "mcp__plugin_serena_serena__initial_instructions",
-      "mcp__UnityMCP__manage_gameobject",
-      "mcp__UnityMCP__manage_editor",
-      "Bash(dir /s /b \"%USERPROFILE%\\\\.config\\\\claude*\")",
-      "Bash(dir /s /b \"%APPDATA%\\\\claude*\")",
-      "Bash(cat:*)",
-      "Bash(curl:*)",
-      "mcp__UnityMCP__read_console",
-      "Bash(dir:*)",
-      "mcp__plugin_context7_context7__resolve-library-id",
-      "mcp__plugin_serena_serena__list_memories",
-      "mcp__plugin_serena_serena__read_memory",
-      "Bash(git add:*)",
-      "Bash(git commit:*)"
-    ]
-  },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "UnityMCP"

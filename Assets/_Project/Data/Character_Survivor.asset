@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d8c93600f491d49bcc8737b3c6ac85, type: 3}
+  m_Name: Character_Survivor
+  m_EditorClassIdentifier: 
+  Id: survivor
+  DisplayName: "\uC0DD\uC874\uC790"
+  Description: 
+  Portrait: {fileID: 0}
+  Animator: {fileID: 0}
+  StartingWeapon: {fileID: 11400000, guid: 41c6135722bed68449cbf96392db2090, type: 2}
+  BaseMaxHealth: 100
+  BaseMoveSpeed: 5
+  BaseArmor: 0
+  BonusMaxHealth: 0
+  BonusMoveSpeed: 0
+  BonusDamage: 0
+  BonusArea: 0
+  BonusDuration: 0
+  BonusProjectileSpeed: 0
+  IsUnlockedByDefault: 1
+  UnlockConditionDescription: 

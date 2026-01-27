@@ -9,6 +9,13 @@
       },
       "hash": "7685db884418276959683ab53bfc7d5ef1f82320"
     },
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "73a63b7f672b88f7e9992f6917eb458a8cbb6fa9"
+    },
     "com.unity.addressables": {
       "version": "1.22.3",
       "depth": 0,

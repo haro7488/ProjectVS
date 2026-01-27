@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c140cc0a01793bc4ab2b3b8439fe9cdf, type: 3}
+  m_Name: Enemy_Zombie
+  m_EditorClassIdentifier: 
+  Id: zombie
+  DisplayName: "\uC880\uBE44"
+  Sprite: {fileID: 0}
+  Animator: {fileID: 0}
+  Prefab: {fileID: 8704512376806959451, guid: e2cffe550e3b8e24b8f48d8495175a11, type: 3}
+  MaxHealth: 10
+  MoveSpeed: 2
+  ContactDamage: 10
+  AttackCooldown: 1
+  Behavior: 0
+  ExpValue: 1
+  GoldValue: 0
+  GoldDropChance: 0.1
+  Scale: 1
+  ColliderRadius: 0.5
+  IsBoss: 0
+  BossHealthMultiplier: 10

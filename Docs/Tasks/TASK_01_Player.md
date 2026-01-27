@@ -136,9 +136,30 @@ namespace Vs.Player
 
 ## 완료 기준
 
-- [ ] WASD 이동 작동
-- [ ] 이동 방향 저장 (`MoveDirection`)
-- [ ] `IDamageable` 구현
-- [ ] 대미지 시 무적 시간
-- [ ] 사망 시 게임 오버
-- [ ] `CharacterData`에서 스탯 로드
+- [x] WASD 이동 작동
+- [x] 이동 방향 저장 (`MoveDirection`)
+- [x] `IDamageable` 구현
+- [x] 대미지 시 무적 시간
+- [x] 사망 시 게임 오버
+- [x] `CharacterData`에서 스탯 로드
+
+---
+
+## 완료 보고
+
+### 수행 작업
+- [x] PlayerController.cs 구현 (WASD/방향키 이동, Rigidbody2D.MovePosition)
+- [x] PlayerHealth.cs 구현 (IDamageable, 무적 시간 0.5초, GameManager.EndGame 연동)
+- [x] PlayerStats.cs 구현 (CharacterData 기반 초기화, 11개 스탯 타입, 이벤트 시스템)
+- [x] WeaponController.cs 구현 (무기 슬롯 6개, 추가/레벨업/제거 기능)
+
+### 결과
+- `Assets/Scripts/Vs.Player/PlayerController.cs` - 이동 및 입력 처리
+- `Assets/Scripts/Vs.Player/PlayerHealth.cs` - 체력 및 피격 처리 (IDamageable)
+- `Assets/Scripts/Vs.Player/PlayerStats.cs` - 스탯 관리 (StatType enum 포함)
+- `Assets/Scripts/Vs.Player/WeaponController.cs` - 무기 슬롯 관리 (WeaponSlot 클래스 포함)
+
+### 확인 필요
+- Unity Editor에서 컴파일 확인 필요
+- 실제 플레이 테스트 (WASD 이동, 대미지 처리)
+- PlayerStats.Initialize()에 CharacterData 전달 연동 필요

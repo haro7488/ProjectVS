@@ -6,8 +6,7 @@ namespace Vs.Core
 {
     public class TimeManager : Singleton<TimeManager>
     {
-        [Header("Settings")]
-        [SerializeField] private float _stageDuration = Constants.DefaultStageDuration;
+        [Header("Settings")] [SerializeField] private float _stageDuration = Constants.DefaultStageDuration;
 
         private float _elapsedTime;
         private bool _isRunning;
@@ -32,8 +31,10 @@ namespace Vs.Core
             }
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+
             if (GameManager.HasInstance)
             {
                 GameManager.Instance.OnStateChanged -= HandleGameStateChanged;
