@@ -2,5 +2,10 @@
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "UnityMCP"
-  ]
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(timeout:*)"
+    ]
+  }
 }
