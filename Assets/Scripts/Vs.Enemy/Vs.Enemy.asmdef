@@ -1,0 +1,19 @@
+{
+    "name": "Vs.Enemy",
+    "rootNamespace": "Vs.Enemy",
+    "references": [
+        "Vs.Utility",
+        "Vs.Core",
+        "Vs.Data",
+        "Vs.Combat"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

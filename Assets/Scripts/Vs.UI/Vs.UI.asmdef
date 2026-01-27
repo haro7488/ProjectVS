@@ -1,0 +1,19 @@
+{
+    "name": "Vs.UI",
+    "rootNamespace": "Vs.UI",
+    "references": [
+        "Vs.Utility",
+        "Vs.Core",
+        "Vs.Data",
+        "Vs.Progression"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
