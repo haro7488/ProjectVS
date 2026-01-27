@@ -17,6 +17,55 @@ Unity 2022.x / C# / UniTask / Addressables / URP
 | 명명 | 인터페이스 `I`, private `_` |
 | 구조 | 파일당 클래스 1개, 이벤트 기반 통신 |
 
+## Unity MCP
+
+> Unity 에디터 작업은 **서브에이전트에 위임** (메인은 결과 보고만 수신)
+
+### 위임 대상 작업
+
+| 작업 | 도구 |
+|------|------|
+| 프리팹 생성/수정 | `manage_gameobject`, `manage_prefabs` |
+| 컴포넌트 추가/설정 | `manage_components` |
+| SO 에셋 생성/수정 | `manage_scriptable_object` |
+| 씬 구성 | `manage_scene`, `manage_gameobject` |
+| 레이어/태그 설정 | `manage_editor` |
+| 에셋 관리 | `manage_asset` |
+| 플레이 테스트 | `manage_editor(action="play/stop")` |
+| 콘솔 확인 | `read_console` |
+
+### 서브에이전트 호출 방식
+
+```
+Task tool 호출:
+- subagent_type: "general-purpose"
+- model: "opus"
+- prompt: TASK 문서 경로 + Unity MCP 사용 지시
+```
+
+### 서브에이전트 보고 형식
+
+```markdown
+## 완료 보고
+
+### 수행 작업
+- [x] 생성/수정된 에셋 목록
+
+### 결과
+- 성공/실패 여부
+- 생성된 에셋 경로
+
+### 확인 필요
+- 수동 설정 항목 (충돌 매트릭스 등)
+- 발견된 이슈
+```
+
+### 주의사항
+
+- 스크립트 컴파일 완료 후 컴포넌트 추가 가능
+- 프리팹 GUID는 `manage_asset(action="get_info")`로 조회
+- Physics2D 충돌 매트릭스는 수동 설정 필요
+
 ## 서브에이전트 위임
 
 > 메인 = 검토/의사결정, 서브 = 탐색/문서화/구현
@@ -28,6 +77,7 @@ Unity 2022.x / C# / UniTask / Addressables / URP
 | 설계/문서 | `code-architect` | **opus** |
 | 기능 구현 | `general-purpose` | **opus** |
 | 코드 리뷰 | `code-reviewer` | **opus** |
+| **Unity 에디터 작업** | `general-purpose` | **opus** |
 
 **메인 직접**: 단일 파일, Serena 심볼 조회, 최종 승인
 
@@ -50,6 +100,7 @@ Unity 2022.x / C# / UniTask / Addressables / URP
 | `/analyze {대상}` | 분석 → 설계안 |
 | `/impl {기능}` | 분석 → 구현 → 검증 |
 | `/review {대상}` | 코드 리뷰 |
+| `/unity-log` | Unity 콘솔 로그 확인 |
 
 ## 컨텍스트 관리
 
@@ -149,4 +200,5 @@ Add feature       ← 영어 (동사 원형)
 | `.claude/USAGE_GUIDE.md` | 사용법 가이드 |
 | `Docs/PROGRESS.md` | 작업 상태 |
 | `Docs/ARCHITECTURE.md` | 폴더/의존성 |
+| `Docs/Design/PREFAB_BUILDER_GUIDELINES.md` | 프리팹 생성 지침 |
 | `.claude/MULTI_SESSION.md` | 멀티세션 |
