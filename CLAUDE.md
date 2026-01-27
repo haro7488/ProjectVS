@@ -1,6 +1,12 @@
 # ProjectVS
 
-Unity 프로젝트 | Unity 2022.x / C# / UniTask / Addressables
+**뱀서라이크 서바이벌 게임** | 현대 도시 테마 | PC + 모바일
+
+Unity 2022.x / C# / UniTask / Addressables / URP
+
+> 끊임없이 몰려오는 적을 자동 공격으로 처치하며 생존하는 로그라이트 액션
+
+**GDD**: `Docs/Design/GDD.md`
 
 ## 핵심 규칙
 
@@ -139,7 +145,8 @@ Add feature       ← 영어 (동사 원형)
 
 | 문서 | 용도 |
 |------|------|
-| `.claude/USAGE_GUIDE.md` | **사용법 가이드** |
+| `Docs/Design/GDD.md` | **게임 디자인** |
+| `.claude/USAGE_GUIDE.md` | 사용법 가이드 |
 | `Docs/PROGRESS.md` | 작업 상태 |
 | `Docs/ARCHITECTURE.md` | 폴더/의존성 |
 | `.claude/MULTI_SESSION.md` | 멀티세션 |
