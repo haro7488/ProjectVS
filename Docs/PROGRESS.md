@@ -28,9 +28,15 @@
   - [x] TempLevelUpUI 추가 - 임시 키보드 레벨업 선택
   - [x] 컴파일 오류 수정 (TimeManager override, Assembly 참조)
   - [x] 컴포넌트 연결 (CharacterData, StageData, 프리팹 참조)
-
-### 진행 중
-- [ ] 플레이 테스트 및 버그 수정
+- [x] **2D → 3D 쿼터뷰 전환 완료**
+  - [x] Singleton.cs - Domain Reload 비활성화 환경 대응
+  - [x] 스크립트 12개 수정 (Rigidbody2D → Rigidbody, Vector2 → Vector3)
+  - [x] 프리팹 3D 컴포넌트로 교체 (Player, Enemy, Projectile, ExpGem)
+  - [x] CameraFollow 쿼터뷰 카메라 구현 (오프셋 10,15,-10 / 회전 45,-45,0)
+  - [x] Ground Plane 추가, 머티리얼 생성
+- [x] **M1 마무리 완료**
+  - [x] 플레이어 머티리얼 설정 (PlayerBlue.mat)
+  - [x] Physics 충돌 매트릭스 설정
 
 ### 예정
 - [ ] UI 구현
@@ -102,6 +108,13 @@
 - `Assets/Scripts/Vs.Progression/ExpPickupSpawner.cs` (신규)
 - `Assets/Scripts/Vs.Progression/TempLevelUpUI.cs` (신규)
 
+### 머티리얼
+- `Assets/_Project/Materials/PlayerBlue.mat`
+- `Assets/_Project/Materials/EnemyRed.mat`
+- `Assets/_Project/Materials/ProjectileYellow.mat`
+- `Assets/_Project/Materials/ExpGemGreen.mat`
+- `Assets/_Project/Materials/GroundGray.mat`
+
 ### Assembly Definition (9개)
 - `Vs.Utility`, `Vs.Core`, `Vs.Data`, `Vs.Combat`
 - `Vs.Player`, `Vs.Enemy`, `Vs.Progression`, `Vs.Meta`, `Vs.UI`
@@ -117,3 +130,5 @@
 | 2026-01-28 | M1 Round 1 완료 - 플레이어/무기/적/경험치 시스템 |
 | 2026-01-28 | M1 Round 2 완료 - SO/프리팹/씬 설정 |
 | 2026-01-28 | M1 Round 3 완료 - 통합 테스트 (TASK_06) |
+| 2026-01-28 | 2D → 3D 쿼터뷰 전환 완료 (스크립트 12개, 프리팹/씬 설정) |
+| 2026-01-28 | M1 마무리 - 머티리얼 설정, Physics 충돌 매트릭스 설정 |
