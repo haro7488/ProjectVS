@@ -100,3 +100,7 @@ InitTestScene*.unity*
 
 # JetBrains IDE
 .idea/
+
+# Screenshots (테스트용)
+/[Aa]ssets/Screenshots/
+/[Aa]ssets/Screenshots.meta
