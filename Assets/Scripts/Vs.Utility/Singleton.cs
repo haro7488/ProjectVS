@@ -11,37 +11,60 @@ namespace Vs.Utility
         private static readonly object _lock = new();
         private static bool _isQuitting;
 
+        /// <summary>
+        /// Enter Play Mode Options로 Domain Reload가 비활성화된 경우
+        /// static 변수 초기화를 위해 필요.
+        /// </summary>
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetStaticFields()
+        {
+            _instance = null;
+            _isQuitting = false;
+        }
+
         public static T Instance
         {
             get
             {
-                if (_isQuitting)
-                {
-                    return null;
-                }
-
                 lock (_lock)
                 {
-                    if (_instance == null)
+                    // 기존 인스턴스가 유효하면 반환
+                    if (_instance != null)
                     {
-                        _instance = FindFirstObjectByType<T>();
-
-                        if (_instance == null)
-                        {
-                            var go = new GameObject($"[{typeof(T).Name}]");
-                            _instance = go.AddComponent<T>();
-                        }
+                        return _instance;
                     }
 
+                    // 씬에서 인스턴스 찾기
+                    _instance = FindFirstObjectByType<T>();
+
+                    if (_instance != null)
+                    {
+                        // 인스턴스를 찾았으면 이전 세션의 _isQuitting 상태 리셋
+                        _isQuitting = false;
+                        return _instance;
+                    }
+
+                    // 종료 중이면 새로 생성하지 않음
+                    if (_isQuitting)
+                    {
+                        return null;
+                    }
+
+                    // 새로 생성
+                    var go = new GameObject($"[{typeof(T).Name}]");
+                    _instance = go.AddComponent<T>();
                     return _instance;
                 }
             }
         }
 
-        public static bool HasInstance => _instance != null;
+        public static bool HasInstance => _instance != null && !_isQuitting;
 
         protected virtual void Awake()
         {
+            // 에디터 Play 모드 재시작 시 이전 세션의 _isQuitting 상태 리셋
+            _isQuitting = false;
+
             if (_instance != null && _instance != this)
             {
                 Destroy(gameObject);
