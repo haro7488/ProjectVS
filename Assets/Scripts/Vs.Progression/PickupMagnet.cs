@@ -13,11 +13,11 @@ namespace Vs.Progression
 
         [Header("Debug")] [SerializeField] private bool _debugMode;
 
-        private readonly Collider2D[] _overlapResults = new Collider2D[32];
+        private readonly Collider[] _overlapResults = new Collider[32];
 
         private void FixedUpdate()
         {
-            int count = Physics2D.OverlapCircleNonAlloc(
+            int count = Physics.OverlapSphereNonAlloc(
                 transform.position,
                 _magnetRadius,
                 _overlapResults,

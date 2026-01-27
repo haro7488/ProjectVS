@@ -9,8 +9,8 @@ namespace Vs.Enemy
     /// <summary>
     /// 적 기본 클래스. IDamageable과 IPoolable 인터페이스 구현.
     /// </summary>
-    [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Collider))]
     public class EnemyBase : MonoBehaviour, IDamageable, IPoolable
     {
         [SerializeField] protected EnemyData _data;
@@ -18,8 +18,7 @@ namespace Vs.Enemy
         protected float _currentHealth;
         protected Transform _target;
         protected float _lastContactDamageTime;
-        protected Rigidbody2D _rb;
-        protected SpriteRenderer _spriteRenderer;
+        protected Rigidbody _rb;
 
         private float _healthMultiplier = 1f;
         private float _damageMultiplier = 1f;
@@ -44,12 +43,11 @@ namespace Vs.Enemy
 
         protected virtual void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _rb = GetComponent<Rigidbody>();
 
-            // Rigidbody2D 설정
-            _rb.gravityScale = 0f;
-            _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            // Rigidbody 설정 (3D)
+            _rb.useGravity = false;
+            _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         }
 
         /// <summary>
@@ -65,12 +63,6 @@ namespace Vs.Enemy
 
             _currentHealth = MaxHealth;
             _lastContactDamageTime = -_data.AttackCooldown; // 즉시 접촉 대미지 가능
-
-            // 비주얼 설정
-            if (_spriteRenderer != null && _data.Sprite != null)
-            {
-                _spriteRenderer.sprite = _data.Sprite;
-            }
 
             // 크기 설정
             transform.localScale = Vector3.one * _data.Scale;
@@ -97,7 +89,8 @@ namespace Vs.Enemy
             // 넉백 적용
             if (damage.Knockback > 0f && _rb != null)
             {
-                _rb.AddForce(damage.Direction.normalized * damage.Knockback, ForceMode2D.Impulse);
+                Vector3 knockbackDir = new Vector3(damage.Direction.x, 0f, damage.Direction.z).normalized;
+                _rb.AddForce(knockbackDir * damage.Knockback, ForceMode.Impulse);
             }
 
             if (IsDead)
@@ -132,7 +125,7 @@ namespace Vs.Enemy
             // 속도 초기화
             if (_rb != null)
             {
-                _rb.velocity = Vector2.zero;
+                _rb.velocity = Vector3.zero;
             }
         }
 
@@ -157,7 +150,7 @@ namespace Vs.Enemy
             }
         }
 
-        protected virtual void OnCollisionStay2D(Collision2D other)
+        protected virtual void OnCollisionStay(Collision other)
         {
             // 접촉 대미지 쿨다운 확인
             if (Time.time < _lastContactDamageTime + _data.AttackCooldown) return;
@@ -169,7 +162,7 @@ namespace Vs.Enemy
             if (damageable == null) return;
 
             float damage = _data.ContactDamage * _damageMultiplier;
-            Vector2 direction = (other.transform.position - transform.position).normalized;
+            Vector3 direction = (other.transform.position - transform.position).normalized;
 
             var damageInfo = new DamageInfo(
                 amount: damage,

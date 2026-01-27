@@ -6,13 +6,12 @@ namespace Vs.Enemy
     /// 적 AI 행동 컴포넌트. 플레이어 추적 로직 담당.
     /// </summary>
     [RequireComponent(typeof(EnemyBase))]
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody))]
     public class EnemyAI : MonoBehaviour
     {
         private EnemyBase _enemy;
         private Transform _target;
-        private Rigidbody2D _rb;
-        private SpriteRenderer _spriteRenderer;
+        private Rigidbody _rb;
 
         private float _moveSpeed = 2f;
 
@@ -23,8 +22,7 @@ namespace Vs.Enemy
         private void Awake()
         {
             _enemy = GetComponent<EnemyBase>();
-            _rb = GetComponent<Rigidbody2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _rb = GetComponent<Rigidbody>();
         }
 
         /// <summary>
@@ -46,23 +44,26 @@ namespace Vs.Enemy
 
         private void ChaseTarget()
         {
-            Vector2 direction = (_target.position - transform.position).normalized;
-            float distance = Vector2.Distance(transform.position, _target.position);
+            // XZ 평면에서 방향 계산 (Y축 무시)
+            Vector3 targetPos = new Vector3(_target.position.x, transform.position.y, _target.position.z);
+            Vector3 direction = (targetPos - transform.position).normalized;
+            float distance = Vector3.Distance(transform.position, targetPos);
 
             // 정지 거리 내에 있으면 이동 중지
             if (distance <= _stoppingDistance)
             {
-                _rb.velocity = Vector2.zero;
+                _rb.velocity = Vector3.zero;
                 return;
             }
 
             // 플레이어 방향으로 이동
             _rb.velocity = direction * _moveSpeed;
 
-            // 스프라이트 방향 설정 (좌우 반전)
-            if (_spriteRenderer != null)
+            // 이동 방향으로 회전 (Y축)
+            if (direction.sqrMagnitude > 0.01f)
             {
-                _spriteRenderer.flipX = direction.x < 0;
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
             }
         }
 
@@ -72,7 +73,7 @@ namespace Vs.Enemy
         public void Disable()
         {
             _isInitialized = false;
-            _rb.velocity = Vector2.zero;
+            _rb.velocity = Vector3.zero;
         }
 
         /// <summary>

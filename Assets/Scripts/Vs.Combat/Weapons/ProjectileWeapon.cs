@@ -17,7 +17,7 @@ namespace Vs.Combat
         [SerializeField] private bool _isPiercing;
         [SerializeField] private int _pierceCount = 1;
 
-        private Vector2 _lastMoveDirection = Vector2.right;
+        private Vector3 _lastMoveDirection = Vector3.forward;
 
         #region Public Methods
 
@@ -35,11 +35,11 @@ namespace Vs.Combat
         /// <summary>
         /// 마지막 이동 방향을 업데이트합니다 (플레이어 이동 시 호출).
         /// </summary>
-        public void UpdateMoveDirection(Vector2 direction)
+        public void UpdateMoveDirection(Vector3 direction)
         {
             if (direction.sqrMagnitude > 0.01f)
             {
-                _lastMoveDirection = direction.normalized;
+                _lastMoveDirection = new Vector3(direction.x, 0f, direction.z).normalized;
             }
         }
 
@@ -55,7 +55,7 @@ namespace Vs.Combat
                 return;
             }
 
-            Vector2 fireDirection = GetFireDirection();
+            Vector3 fireDirection = GetFireDirection();
 
             if (_projectileCount <= 1)
             {
@@ -71,13 +71,15 @@ namespace Vs.Combat
 
         #region Private Methods
 
-        private Vector2 GetFireDirection()
+        private Vector3 GetFireDirection()
         {
             Transform nearestEnemy = FindNearestEnemy();
 
             if (nearestEnemy != null)
             {
-                return ((Vector2)(nearestEnemy.position - _owner.position)).normalized;
+                Vector3 dir = nearestEnemy.position - _owner.position;
+                dir.y = 0f; // XZ 평면에서만
+                return dir.normalized;
             }
 
             return _lastMoveDirection;
@@ -92,7 +94,7 @@ namespace Vs.Combat
 
             Transform nearest = null;
             float nearestDistance = float.MaxValue;
-            Vector2 ownerPos = _owner.position;
+            Vector3 ownerPos = _owner.position;
 
             foreach (var enemy in enemies)
             {
@@ -102,7 +104,7 @@ namespace Vs.Combat
                     continue;
                 }
 
-                float distance = Vector2.Distance(ownerPos, enemy.transform.position);
+                float distance = Vector3.Distance(ownerPos, enemy.transform.position);
 
                 if (distance < nearestDistance)
                 {
@@ -114,10 +116,10 @@ namespace Vs.Combat
             return nearest;
         }
 
-        private void SpawnProjectile(Vector2 direction)
+        private void SpawnProjectile(Vector3 direction)
         {
             Vector3 spawnPos = _owner.position;
-            Quaternion rotation = Quaternion.FromToRotation(Vector3.right, direction);
+            Quaternion rotation = Quaternion.LookRotation(direction);
 
             var projectileObj = PoolManager.Instance.Spawn(_projectilePrefab, spawnPos, rotation);
 
@@ -129,17 +131,19 @@ namespace Vs.Combat
             }
         }
 
-        private void SpawnMultipleProjectiles(Vector2 centerDirection)
+        private void SpawnMultipleProjectiles(Vector3 centerDirection)
         {
             float totalSpread = _spreadAngle * (_projectileCount - 1);
             float startAngle = -totalSpread / 2f;
-            float baseAngle = Mathf.Atan2(centerDirection.y, centerDirection.x) * Mathf.Rad2Deg;
+            // XZ 평면에서 각도 계산
+            float baseAngle = Mathf.Atan2(centerDirection.x, centerDirection.z) * Mathf.Rad2Deg;
 
             for (int i = 0; i < _projectileCount; i++)
             {
                 float angle = baseAngle + startAngle + (_spreadAngle * i);
                 float rad = angle * Mathf.Deg2Rad;
-                Vector2 direction = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+                // XZ 평면에서 방향 (Y축 회전)
+                Vector3 direction = new Vector3(Mathf.Sin(rad), 0f, Mathf.Cos(rad));
 
                 SpawnProjectile(direction);
             }

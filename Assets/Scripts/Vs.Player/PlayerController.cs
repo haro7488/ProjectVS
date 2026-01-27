@@ -4,27 +4,27 @@ namespace Vs.Player
 {
     /// <summary>
     /// 플레이어 이동 및 입력 처리.
-    /// WASD/방향키로 8방향 이동 지원.
+    /// WASD/방향키로 8방향 이동 지원 (XZ 평면).
     /// </summary>
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody))]
     public class PlayerController : MonoBehaviour
     {
         [Header("Movement")] [SerializeField] private float _moveSpeed = 5f;
 
-        private Rigidbody2D _rb;
-        private Vector2 _moveInput;
-        private Vector2 _lastMoveDirection = Vector2.right;
+        private Rigidbody _rb;
+        private Vector3 _moveInput;
+        private Vector3 _lastMoveDirection = Vector3.forward;
 
         /// <summary>
         /// 마지막 이동 방향 (무기 발사 방향 등에 사용).
         /// 이동하지 않을 때도 마지막 방향 유지.
         /// </summary>
-        public Vector2 MoveDirection => _lastMoveDirection;
+        public Vector3 MoveDirection => _lastMoveDirection;
 
         /// <summary>
         /// 현재 위치.
         /// </summary>
-        public Vector2 Position => transform.position;
+        public Vector3 Position => transform.position;
 
         /// <summary>
         /// 현재 이동 중인지 여부.
@@ -38,9 +38,9 @@ namespace Vs.Player
 
         private void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
-            _rb.gravityScale = 0f;
-            _rb.freezeRotation = true;
+            _rb = GetComponent<Rigidbody>();
+            _rb.useGravity = false;
+            _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         }
 
         private void Update()
@@ -59,7 +59,8 @@ namespace Vs.Player
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
-            _moveInput = new Vector2(horizontal, vertical);
+            // XZ 평면 이동 (쿼터뷰)
+            _moveInput = new Vector3(horizontal, 0f, vertical);
 
             // 대각선 이동 시 정규화
             if (_moveInput.sqrMagnitude > 1f)
@@ -76,7 +77,7 @@ namespace Vs.Player
 
         private void ApplyMovement()
         {
-            Vector2 targetPosition = _rb.position + _moveInput * (_moveSpeed * Time.fixedDeltaTime);
+            Vector3 targetPosition = _rb.position + _moveInput * (_moveSpeed * Time.fixedDeltaTime);
             _rb.MovePosition(targetPosition);
         }
 
@@ -91,9 +92,9 @@ namespace Vs.Player
         /// <summary>
         /// 외부에서 이동 입력 주입 (AI 또는 자동 플레이용).
         /// </summary>
-        public void SetMoveInput(Vector2 input)
+        public void SetMoveInput(Vector3 input)
         {
-            _moveInput = input;
+            _moveInput = new Vector3(input.x, 0f, input.z);
             if (_moveInput.sqrMagnitude > 1f)
             {
                 _moveInput.Normalize();

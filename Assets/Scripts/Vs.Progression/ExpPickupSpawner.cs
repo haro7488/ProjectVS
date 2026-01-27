@@ -59,7 +59,7 @@ namespace Vs.Progression
             SpawnExpPickup(deathEvent.Position, deathEvent.ExpValue);
         }
 
-        private void SpawnExpPickup(Vector2 position, int expValue)
+        private void SpawnExpPickup(Vector3 position, int expValue)
         {
             GameObject pickupObj;
 

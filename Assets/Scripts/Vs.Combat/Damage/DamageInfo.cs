@@ -14,8 +14,8 @@ namespace Vs.Combat
     {
         public float Amount { get; }
         public DamageType Type { get; }
-        public Vector2 Position { get; }
-        public Vector2 Direction { get; }
+        public Vector3 Position { get; }
+        public Vector3 Direction { get; }
         public GameObject Source { get; }
         public bool IsCritical { get; }
         public float Knockback { get; }
@@ -23,8 +23,8 @@ namespace Vs.Combat
         public DamageInfo(
             float amount,
             DamageType type = DamageType.Physical,
-            Vector2 position = default,
-            Vector2 direction = default,
+            Vector3 position = default,
+            Vector3 direction = default,
             GameObject source = null,
             bool isCritical = false,
             float knockback = 0f)

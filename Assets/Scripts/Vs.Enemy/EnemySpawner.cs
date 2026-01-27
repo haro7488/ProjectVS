@@ -199,7 +199,7 @@ namespace Vs.Enemy
                 return;
             }
 
-            Vector2 spawnPos = GetSpawnPosition();
+            Vector3 spawnPos = GetSpawnPosition();
 
             // 난이도 배율 계산
             float elapsedMinutes = _elapsedTime / 60f;
@@ -232,10 +232,10 @@ namespace Vs.Enemy
             _activeEnemyCount++;
         }
 
-        private Vector2 GetSpawnPosition()
+        private Vector3 GetSpawnPosition()
         {
-            // 화면 밖, 플레이어 주변에 스폰
-            Vector2 playerPos = _player.position;
+            // 화면 밖, 플레이어 주변에 스폰 (XZ 평면)
+            Vector3 playerPos = _player.position;
 
             // 랜덤 각도 선택
             float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
@@ -243,17 +243,21 @@ namespace Vs.Enemy
             // 최소/최대 거리 사이에서 랜덤 거리 선택
             float distance = Random.Range(_minSpawnDistance, _spawnRadius);
 
-            Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * distance;
-            Vector2 spawnPos = playerPos + offset;
+            // XZ 평면에서 오프셋 계산
+            Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * distance;
+            Vector3 spawnPos = playerPos + offset;
+
+            // Y축은 플레이어와 동일하게 (바닥 높이)
+            spawnPos.y = playerPos.y;
 
             // 맵 범위 클램핑 (StageData에서 MapSize 사용)
             if (_stageData != null)
             {
                 float halfWidth = _stageData.MapSize.x / 2f;
-                float halfHeight = _stageData.MapSize.y / 2f;
+                float halfDepth = _stageData.MapSize.y / 2f; // Y는 깊이(Z)로 사용
 
                 spawnPos.x = Mathf.Clamp(spawnPos.x, -halfWidth, halfWidth);
-                spawnPos.y = Mathf.Clamp(spawnPos.y, -halfHeight, halfHeight);
+                spawnPos.z = Mathf.Clamp(spawnPos.z, -halfDepth, halfDepth);
             }
 
             return spawnPos;

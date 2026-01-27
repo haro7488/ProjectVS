@@ -8,8 +8,8 @@ namespace Vs.Combat
     /// 직선으로 이동하는 투사체.
     /// 적과 충돌 시 대미지를 주고, 수명이 다하면 자동으로 반환됩니다.
     /// </summary>
-    [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Collider))]
     public class Projectile : MonoBehaviour, IPoolable
     {
         [Header("Settings")] [SerializeField] private float _defaultDuration = 5f;
@@ -17,13 +17,13 @@ namespace Vs.Combat
         private float _damage;
         private float _speed;
         private float _duration;
-        private Vector2 _direction;
+        private Vector3 _direction;
         private float _spawnTime;
         private bool _isPiercing;
         private int _pierceCount;
         private int _currentPierceCount;
 
-        private Rigidbody2D _rb;
+        private Rigidbody _rb;
         private GameObject _prefabSource;
         private DamageType _damageType = DamageType.Physical;
 
@@ -38,9 +38,10 @@ namespace Vs.Combat
 
         private void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
-            _rb.gravityScale = 0f;
-            _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+            _rb = GetComponent<Rigidbody>();
+            _rb.useGravity = false;
+            _rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         }
 
         private void Update()
@@ -58,7 +59,7 @@ namespace Vs.Combat
             _rb.velocity = _direction * _speed;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter(Collider other)
         {
             // 적과 충돌 확인
             if (!other.CompareTag(Constants.TagEnemy)) return;
@@ -104,8 +105,8 @@ namespace Vs.Combat
 
         public void OnDespawn()
         {
-            _rb.velocity = Vector2.zero;
-            _direction = Vector2.zero;
+            _rb.velocity = Vector3.zero;
+            _direction = Vector3.zero;
         }
 
         #endregion
@@ -115,11 +116,11 @@ namespace Vs.Combat
         /// <summary>
         /// 투사체를 초기화합니다.
         /// </summary>
-        public void Initialize(float damage, float speed, Vector2 direction, float duration = 0f)
+        public void Initialize(float damage, float speed, Vector3 direction, float duration = 0f)
         {
             _damage = damage;
             _speed = speed;
-            _direction = direction.normalized;
+            _direction = new Vector3(direction.x, 0f, direction.z).normalized;
             _duration = duration > 0f ? duration : _defaultDuration;
             _isPiercing = false;
             _pierceCount = 0;

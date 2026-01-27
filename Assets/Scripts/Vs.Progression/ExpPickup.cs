@@ -7,7 +7,7 @@ namespace Vs.Progression
     /// 경험치 젬 픽업.
     /// 적 처치 시 스폰되며, 플레이어 픽업 범위 진입 시 자동 수집.
     /// </summary>
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Collider))]
     public class ExpPickup : MonoBehaviour, IPoolable
     {
         [Header("경험치")] [SerializeField] private int _expValue = 1;
