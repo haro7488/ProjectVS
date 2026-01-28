@@ -168,7 +168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allWeapons:
   - {fileID: 11400000, guid: 41c6135722bed68449cbf96392db2090, type: 2}
-  _allPassives: []
+  _allPassives:
+  - {fileID: 11400000, guid: ee936bc9207984fb088fc0eac5a60fea, type: 2}
+  - {fileID: 11400000, guid: d444a67270cea4d4ab3c9324a54e0f32, type: 2}
   _debugMode: 1
 --- !u!1 &77549253
 GameObject:
@@ -404,6 +406,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugMode: 1
+--- !u!134 &711149384
+PhysicMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  dynamicFriction: 0.6
+  staticFriction: 0.6
+  bounciness: 0
+  frictionCombine: 0
+  bounceCombine: 0
 --- !u!1 &798246806
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +537,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 77549254}
     m_Modifications:
+    - target: {fileID: 25188275660826885, guid: 0acc5322c7bf2a241a6762a50e9c2630,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 711149384}
     - target: {fileID: 5705277774172922691, guid: 0acc5322c7bf2a241a6762a50e9c2630,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -929,7 +948,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e2b2a63d171a5e946a429ce1a01c4791, type: 2}
+  - {fileID: 2100000, guid: c4bc5e9093fff4650be10c97522e5682, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -44,6 +44,14 @@ namespace Vs.Player
             {
                 GameManager.Instance.OnGameStarted += HandleGameStarted;
             }
+
+            if (LevelUpManager.HasInstance)
+            {
+                LevelUpManager.Instance.OnWeaponAdded += HandleWeaponAdded;
+                LevelUpManager.Instance.OnWeaponUpgraded += HandleWeaponUpgraded;
+                LevelUpManager.Instance.OnPassiveAdded += HandlePassiveAdded;
+                LevelUpManager.Instance.OnPassiveUpgraded += HandlePassiveUpgraded;
+            }
         }
 
         private void OnDisable()
@@ -51,6 +59,14 @@ namespace Vs.Player
             if (GameManager.HasInstance)
             {
                 GameManager.Instance.OnGameStarted -= HandleGameStarted;
+            }
+
+            if (LevelUpManager.HasInstance)
+            {
+                LevelUpManager.Instance.OnWeaponAdded -= HandleWeaponAdded;
+                LevelUpManager.Instance.OnWeaponUpgraded -= HandleWeaponUpgraded;
+                LevelUpManager.Instance.OnPassiveAdded -= HandlePassiveAdded;
+                LevelUpManager.Instance.OnPassiveUpgraded -= HandlePassiveUpgraded;
             }
         }
 
@@ -76,6 +92,104 @@ namespace Vs.Player
         private void HandleGameStarted()
         {
             Initialize();
+        }
+
+        private void HandleWeaponAdded(WeaponData weapon, int level)
+        {
+            if (_weaponController != null && weapon != null)
+            {
+                _weaponController.AddWeapon(weapon);
+
+                if (_debugMode)
+                {
+                    Debug.Log($"[PlayerInitializer] Weapon added: {weapon.DisplayName} Lv.{level}");
+                }
+            }
+        }
+
+        private void HandleWeaponUpgraded(WeaponData weapon, int level)
+        {
+            if (_weaponController != null && weapon != null)
+            {
+                _weaponController.LevelUpWeapon(weapon);
+
+                if (_debugMode)
+                {
+                    Debug.Log($"[PlayerInitializer] Weapon upgraded: {weapon.DisplayName} Lv.{level}");
+                }
+            }
+        }
+
+        private void HandlePassiveAdded(PassiveData passive, int level)
+        {
+            if (_playerStats != null && passive != null)
+            {
+                ApplyPassiveStats(passive, level);
+
+                if (_debugMode)
+                {
+                    Debug.Log($"[PlayerInitializer] Passive added: {passive.DisplayName} Lv.{level}");
+                }
+            }
+        }
+
+        private void HandlePassiveUpgraded(PassiveData passive, int level)
+        {
+            if (_playerStats != null && passive != null)
+            {
+                // 업그레이드 시 레벨 차이만큼 추가 적용
+                ApplyPassiveStats(passive, 1);
+
+                if (_debugMode)
+                {
+                    Debug.Log($"[PlayerInitializer] Passive upgraded: {passive.DisplayName} Lv.{level}");
+                }
+            }
+        }
+
+        private void ApplyPassiveStats(PassiveData passive, int levelsToApply)
+        {
+            if (passive == null || _playerStats == null) return;
+
+            // Data.StatType → Player.StatType 변환
+            var statType = ConvertStatType(passive.PrimaryStat);
+
+            if (statType.HasValue)
+            {
+                float value = passive.IsPercentage
+                    ? passive.ValuePerLevel / 100f  // % → 소수점
+                    : passive.ValuePerLevel;
+                _playerStats.AddBonus(statType.Value, value * levelsToApply);
+            }
+
+            // 보조 스탯 적용
+            if (passive.SecondaryStat != passive.PrimaryStat)
+            {
+                var secondaryStatType = ConvertStatType(passive.SecondaryStat);
+                if (secondaryStatType.HasValue)
+                {
+                    float secondaryValue = passive.SecondaryIsPercentage
+                        ? passive.SecondaryValuePerLevel / 100f
+                        : passive.SecondaryValuePerLevel;
+                    _playerStats.AddBonus(secondaryStatType.Value, secondaryValue * levelsToApply);
+                }
+            }
+        }
+
+        private static StatType? ConvertStatType(Data.StatType dataStatType)
+        {
+            return dataStatType switch
+            {
+                Data.StatType.MaxHealth => StatType.MaxHealth,
+                Data.StatType.MoveSpeed => StatType.MoveSpeed,
+                Data.StatType.Damage => StatType.Damage,
+                Data.StatType.Area => StatType.Area,
+                Data.StatType.Duration => StatType.Duration,
+                Data.StatType.Armor => StatType.Armor,
+                Data.StatType.ExpGain => StatType.ExperienceGain,
+                Data.StatType.PickupRadius => StatType.PickupRange,
+                _ => null
+            };
         }
 
         /// <summary>
@@ -153,6 +267,8 @@ namespace Vs.Player
         {
             if (_weaponController != null && _characterData.StartingWeapon != null)
             {
+                // owner를 플레이어로 설정
+                _weaponController.Initialize(transform);
                 _weaponController.SetStartingWeapon(_characterData.StartingWeapon);
 
                 // LevelUpManager에도 시작 무기 등록

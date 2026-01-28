@@ -20,7 +20,13 @@ MonoBehaviour:
   MapSize: {x: 50, y: 50}
   BackgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   Duration: 300
-  Waves: []
+  Waves:
+  - StartTime: 0
+    EndTime: -1
+    Enemy: {fileID: 11400000, guid: b58c1f713cfc14e4e8c51da3bba0afbc, type: 2}
+    SpawnInterval: 2
+    SpawnCount: 1
+    SpawnCountGrowth: 0.1
   BossSpawns: []
   DifficultyMultiplier: 1
   EnemyHealthGrowth: 0.05

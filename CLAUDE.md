@@ -101,6 +101,7 @@ Task tool 호출:
 | `/impl {기능}` | 분석 → 구현 → 검증 |
 | `/review {대상}` | 코드 리뷰 |
 | `/unity-log` | Unity 콘솔 로그 확인 |
+| `/progress` | 진행상황 확인 |
 
 ## 컨텍스트 관리
 
