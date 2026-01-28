@@ -38,8 +38,15 @@
   - [x] 플레이어 머티리얼 설정 (PlayerBlue.mat)
   - [x] Physics 충돌 매트릭스 설정
 
+- [x] **UI 시스템 구현**
+  - [x] Core: UIPanel, UIManager (GameState 기반 패널 제어)
+  - [x] HUD: HealthBar, ExperienceBar, TimeDisplay, ItemSlotDisplay, ItemSlotsPanel, HUDPanel
+  - [x] Popup: LevelUpPanel, LevelUpChoiceButton, GameOverPanel, VictoryPanel
+  - [x] Canvas 계층 구성 (HUD/Popup 레이어)
+  - [x] TempLevelUpUI 제거
+  - [x] SerializeField 참조 자동 연결 (32개)
+
 ### 예정
-- [ ] UI 구현
 - [ ] 콘텐츠 제작
   - [ ] 무기 6종
   - [ ] 적 4종
@@ -105,8 +112,21 @@
 - `Assets/Scripts/Vs.Progression/LevelUpChoice.cs`
 - `Assets/Scripts/Vs.Progression/ExpPickup.cs`
 - `Assets/Scripts/Vs.Progression/PickupMagnet.cs`
-- `Assets/Scripts/Vs.Progression/ExpPickupSpawner.cs` (신규)
-- `Assets/Scripts/Vs.Progression/TempLevelUpUI.cs` (신규)
+- `Assets/Scripts/Vs.Progression/ExpPickupSpawner.cs`
+
+### UI
+- `Assets/Scripts/Vs.UI/Core/UIPanel.cs`
+- `Assets/Scripts/Vs.UI/Core/UIManager.cs`
+- `Assets/Scripts/Vs.UI/HUD/HealthBar.cs`
+- `Assets/Scripts/Vs.UI/HUD/ExperienceBar.cs`
+- `Assets/Scripts/Vs.UI/HUD/TimeDisplay.cs`
+- `Assets/Scripts/Vs.UI/HUD/ItemSlotDisplay.cs`
+- `Assets/Scripts/Vs.UI/HUD/ItemSlotsPanel.cs`
+- `Assets/Scripts/Vs.UI/HUD/HUDPanel.cs`
+- `Assets/Scripts/Vs.UI/Popup/LevelUpPanel.cs`
+- `Assets/Scripts/Vs.UI/Popup/LevelUpChoiceButton.cs`
+- `Assets/Scripts/Vs.UI/Popup/GameOverPanel.cs`
+- `Assets/Scripts/Vs.UI/Popup/VictoryPanel.cs`
 
 ### 머티리얼
 - `Assets/_Project/Materials/PlayerBlue.mat`
@@ -132,3 +152,4 @@
 | 2026-01-28 | M1 Round 3 완료 - 통합 테스트 (TASK_06) |
 | 2026-01-28 | 2D → 3D 쿼터뷰 전환 완료 (스크립트 12개, 프리팹/씬 설정) |
 | 2026-01-28 | M1 마무리 - 머티리얼 설정, Physics 충돌 매트릭스 설정 |
+| 2026-01-28 | UI 시스템 구현 - Core/HUD/Popup 컴포넌트 12개, Canvas 구조 |
