@@ -12,6 +12,7 @@ namespace Vs.Player
         [Header("Movement")] [SerializeField] private float _moveSpeed = 5f;
 
         private Rigidbody _rb;
+        private Camera _mainCamera;
         private Vector3 _moveInput;
         private Vector3 _lastMoveDirection = Vector3.forward;
 
@@ -41,6 +42,7 @@ namespace Vs.Player
             _rb = GetComponent<Rigidbody>();
             _rb.useGravity = false;
             _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+            _mainCamera = Camera.main;
         }
 
         private void Update()
@@ -59,8 +61,18 @@ namespace Vs.Player
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
-            // XZ 평면 이동 (쿼터뷰)
-            _moveInput = new Vector3(horizontal, 0f, vertical);
+            // 카메라 기준 방향 계산 (XZ 평면)
+            Vector3 cameraForward = _mainCamera.transform.forward;
+            Vector3 cameraRight = _mainCamera.transform.right;
+
+            // Y축 제거 후 정규화 (XZ 평면에 투영)
+            cameraForward.y = 0f;
+            cameraRight.y = 0f;
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            // 카메라 기준으로 이동 방향 계산
+            _moveInput = cameraForward * vertical + cameraRight * horizontal;
 
             // 대각선 이동 시 정규화
             if (_moveInput.sqrMagnitude > 1f)
