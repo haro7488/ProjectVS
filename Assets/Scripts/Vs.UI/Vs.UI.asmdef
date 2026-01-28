@@ -5,7 +5,9 @@
         "Vs.Utility",
         "Vs.Core",
         "Vs.Data",
-        "Vs.Progression"
+        "Vs.Progression",
+        "Vs.Player",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
