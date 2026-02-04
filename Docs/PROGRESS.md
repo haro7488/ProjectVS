@@ -1,6 +1,34 @@
 # ProjectVS - 진행 상황
 
-## 현재 단계: M1 프로토타입
+## 현재 단계: M3 콘텐츠 🟡 진행 중
+
+> 상세: `Docs/Design/Tasks/TASK_M3.md`
+
+### M3 진행 항목
+- [x] M3-a: 적 4종 구현 ✅ (FastZombie, BigZombie, Gangster, Boss)
+- [x] M3-b: 기본 무기 5종 구현 ✅ (Knife, Bat, Molotov, Drone, Lightning)
+- [ ] M3-c: 스테이지 웨이브 구성
+
+### 수동 설정 필요
+- [ ] WeaponData SO에 프리팹 참조 연결
+- [ ] 레벨업 WeaponPool에 무기 등록
+- [ ] Collider Trigger 설정 (FireZone, Orbiter, Projectile_Knife)
+
+---
+
+## M2 핵심 루프 ✅ 완료
+
+> 상세: `Docs/Design/Tasks/TASK_M2.md`
+
+### M2 완료 항목
+- [x] 분석 완료 - 기존 코드 구조 파악
+- [x] M2-1: 진화 시스템 핵심 로직 ✅
+- [x] M2-2: 아이템 슬롯 UI 연동 ✅
+- [x] M2-3: 통합 테스트 및 데이터 ✅
+
+---
+
+## M1 프로토타입 ✅ 완료
 
 ### 완료
 - [x] 프로젝트 초기 설정 (Unity URP)
@@ -46,11 +74,11 @@
   - [x] TempLevelUpUI 제거
   - [x] SerializeField 참조 자동 연결 (32개)
 
-### 예정
-- [ ] 콘텐츠 제작
-  - [ ] 무기 6종
-  - [ ] 적 4종
-  - [ ] 스테이지 1개
+### 예정 (M3에서 진행)
+- [x] 콘텐츠 제작
+  - [x] 기본 무기 5종 (M3-b 완료)
+  - [x] 적 4종 (M3-a 완료)
+  - [ ] 스테이지 웨이브 구성 (M3-c)
 
 ---
 
@@ -60,8 +88,8 @@
 |------|------|------|
 | M0 | 설계 완료 | **완료** |
 | M1 | 프로토타입 (이동 + 공격 + 적) | **완료** |
-| M2 | 핵심 루프 (레벨업 + 진화) | 예정 |
-| M3 | 콘텐츠 (무기/적/스테이지) | 예정 |
+| M2 | 핵심 루프 (레벨업 + 진화) | **완료** |
+| M3 | 콘텐츠 (무기/적/스테이지) | **진행 중** |
 | M4 | 폴리싱 (UI/밸런스) | 예정 |
 
 ---
@@ -93,6 +121,12 @@
 - `Assets/Scripts/Vs.Combat/Weapons/ProjectileWeapon.cs`
 - `Assets/Scripts/Vs.Combat/Weapons/Projectile.cs`
 - `Assets/Scripts/Vs.Combat/Weapons/WeaponController.cs`
+- `Assets/Scripts/Vs.Combat/Weapons/MeleeWeapon.cs` (M3)
+- `Assets/Scripts/Vs.Combat/Weapons/AreaWeapon.cs` (M3)
+- `Assets/Scripts/Vs.Combat/Weapons/OrbitWeapon.cs` (M3)
+- `Assets/Scripts/Vs.Combat/Weapons/LightningWeapon.cs` (M3)
+- `Assets/Scripts/Vs.Combat/Weapons/FireZone.cs` (M3)
+- `Assets/Scripts/Vs.Combat/Weapons/Orbiter.cs` (M3)
 
 ### 플레이어
 - `Assets/Scripts/Vs.Player/PlayerController.cs`
@@ -134,6 +168,10 @@
 - `Assets/_Project/Materials/ProjectileYellow.mat`
 - `Assets/_Project/Materials/ExpGemGreen.mat`
 - `Assets/_Project/Materials/GroundGray.mat`
+- `Assets/_Project/Materials/FastZombieGreen.mat` (M3)
+- `Assets/_Project/Materials/BigZombiePurple.mat` (M3)
+- `Assets/_Project/Materials/GangsterOrange.mat` (M3)
+- `Assets/_Project/Materials/BossDarkRed.mat` (M3)
 
 ### Assembly Definition (9개)
 - `Vs.Utility`, `Vs.Core`, `Vs.Data`, `Vs.Combat`
@@ -153,3 +191,5 @@
 | 2026-01-28 | 2D → 3D 쿼터뷰 전환 완료 (스크립트 12개, 프리팹/씬 설정) |
 | 2026-01-28 | M1 마무리 - 머티리얼 설정, Physics 충돌 매트릭스 설정 |
 | 2026-01-28 | UI 시스템 구현 - Core/HUD/Popup 컴포넌트 12개, Canvas 구조 |
+| 2026-02-04 | M2 완료 - 진화 시스템, UI 연동, SO 설정 |
+| 2026-02-04 | M3 시작 - 적 4종, 무기 5종 구현 완료 (M3-a, M3-b) |
