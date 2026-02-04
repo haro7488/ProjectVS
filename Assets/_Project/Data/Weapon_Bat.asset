@@ -17,7 +17,8 @@ MonoBehaviour:
   Description: "\uC804\uBC29\uC744 \uD718\uB458\uB7EC \uB113\uC740 \uBC94\uC704\uC758
     \uC801\uC5D0\uAC8C \uB370\uBBF8\uC9C0"
   Icon: {fileID: 0}
-  WeaponPrefab: {fileID: 0}
+  WeaponPrefab: {fileID: 3914056893675860668, guid: cef7742a841b04173b34273ab02b935e,
+    type: 3}
   ProjectilePrefab: {fileID: 0}
   Type: 1
   BaseDamage: 20

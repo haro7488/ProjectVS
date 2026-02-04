@@ -1,18 +1,18 @@
 # ProjectVS - 진행 상황
 
-## 현재 단계: M3 콘텐츠 🟡 진행 중
+## 현재 단계: M3 콘텐츠 ✅ 완료
 
 > 상세: `Docs/Design/Tasks/TASK_M3.md`
 
-### M3 진행 항목
+### M3 완료 항목
 - [x] M3-a: 적 4종 구현 ✅ (FastZombie, BigZombie, Gangster, Boss)
 - [x] M3-b: 기본 무기 5종 구현 ✅ (Knife, Bat, Molotov, Drone, Lightning)
-- [ ] M3-c: 스테이지 웨이브 구성
+- [x] M3-c: 스테이지 웨이브 구성 ✅
 
-### 수동 설정 필요
-- [ ] WeaponData SO에 프리팹 참조 연결
-- [ ] 레벨업 WeaponPool에 무기 등록
-- [ ] Collider Trigger 설정 (FireZone, Orbiter, Projectile_Knife)
+### 설정 완료
+- [x] WeaponData SO에 프리팹 참조 연결
+- [x] 레벨업 WeaponPool에 무기 7종 등록 (Pistol, MachineGun + 신규 5종)
+- [x] Collider Trigger 설정 (FireZone, Orbiter_Drone, Projectile_Knife)
 
 ---
 
@@ -131,7 +131,7 @@
 | M0 | 설계 완료 | **완료** |
 | M1 | 프로토타입 (이동 + 공격 + 적) | **완료** |
 | M2 | 핵심 루프 (레벨업 + 진화) | **완료** |
-| M3 | 콘텐츠 (무기/적/스테이지) | **진행 중** |
+| M3 | 콘텐츠 (무기/적/스테이지) | **완료** |
 | M4 | 폴리싱 (UI/밸런스) | 예정 |
 
 ---
@@ -253,3 +253,4 @@
 | 2026-02-04 | M2 완료 - 진화 시스템, UI 연동, SO 설정 |
 | 2026-02-04 | M3 시작 - 적 4종, 무기 5종 구현 완료 (M3-a, M3-b) |
 | 2026-02-04 | 테스트 자동화 시스템 완료 - 3계층 테스트 (202개 테스트) |
+| 2026-02-04 | M3 완료 - 스테이지 웨이브 구성, 프리팹/SO 연결, WeaponPool 등록 |

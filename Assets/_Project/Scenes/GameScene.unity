@@ -403,6 +403,11 @@ MonoBehaviour:
   _allWeapons:
   - {fileID: 11400000, guid: 41c6135722bed68449cbf96392db2090, type: 2}
   - {fileID: 11400000, guid: cf00faa73b2a8490b91cbee144e063ed, type: 2}
+  - {fileID: 11400000, guid: 63680d2565cad4db4a191b85a3f9ed77, type: 2}
+  - {fileID: 11400000, guid: 8f2dae489ff9541feabba8d3ea99c92c, type: 2}
+  - {fileID: 11400000, guid: 624109e3d99a84dd48499d34b1932d5d, type: 2}
+  - {fileID: 11400000, guid: 22cfe9ac368ae43b1a4867f0536b5ead, type: 2}
+  - {fileID: 11400000, guid: c870ec2ab45c545d09e3d30273d8c962, type: 2}
   _allPassives:
   - {fileID: 11400000, guid: ec3edd61b1eab45098fd679fdde1a76a, type: 2}
   - {fileID: 11400000, guid: ee936bc9207984fb088fc0eac5a60fea, type: 2}

@@ -17,8 +17,10 @@ MonoBehaviour:
   Description: "\uD50C\uB808\uC774\uC5B4 \uC774\uB3D9 \uBC29\uD5A5\uC73C\uB85C \uBE60\uB974\uAC8C
     \uB0A0\uC544\uAC00\uB294 \uD22C\uC0AC\uCCB4"
   Icon: {fileID: 0}
-  WeaponPrefab: {fileID: 0}
-  ProjectilePrefab: {fileID: 0}
+  WeaponPrefab: {fileID: 5055914331799264542, guid: 49dc2b1ed1b37484bba31ae8576cbfc7,
+    type: 3}
+  ProjectilePrefab: {fileID: 2831154858236359213, guid: 7c9c7fd477b3046d88264e964ecbc663,
+    type: 3}
   Type: 0
   BaseDamage: 8
   BaseInterval: 0.8
