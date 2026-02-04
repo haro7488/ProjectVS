@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580a7eec3242247479dd16af4048380c, type: 3}
+  m_Name: Weapon_Molotov
+  m_EditorClassIdentifier: 
+  Id: molotov
+  DisplayName: "\uD654\uC5FC\uBCD1"
+  Description: "\uC9C0\uBA74\uC5D0 \uD654\uC5FC \uC9C0\uB300\uB97C \uC0DD\uC131\uD558\uC5EC
+    \uC9C0\uC18D \uB370\uBBF8\uC9C0"
+  Icon: {fileID: 0}
+  WeaponPrefab: {fileID: 0}
+  ProjectilePrefab: {fileID: 0}
+  Type: 2
+  BaseDamage: 5
+  BaseInterval: 3
+  BaseProjectileCount: 1
+  BaseArea: 1.5
+  BaseDuration: 3
+  BaseSpeed: 0
+  EvolvesTo: {fileID: 0}
+  EvolutionRequirement: {fileID: 0}
+  IsEvolved: 0
+  ProjectileColor: {r: 1, g: 1, b: 1, a: 1}
