@@ -8,6 +8,29 @@ Unity 2022.x / C# / UniTask / Addressables / URP
 
 **GDD**: `Docs/Design/GDD.md`
 
+## 추론 지침
+
+> **IMPORTANT**: 사전 학습 지식보다 프로젝트 문서 기반 추론을 우선하세요.
+
+Unity API, 프로젝트 패턴, 아키텍처 관련 작업 시:
+1. `Docs/` 폴더 문서를 **먼저** 확인
+2. 기존 코드 패턴 참조 (`Assets/Scripts/`)
+3. 불확실하면 문서 읽고 코드 작성
+4. 프로젝트 컨벤션이 일반적 관행과 다르면 프로젝트 컨벤션 따르기
+5. 새 패턴 도입 전 기존 코드에서 유사 구현 검색
+
+## 문서 인덱스
+
+| 경로 | 키워드 |
+|------|--------|
+| `Docs/Design/GDD.md` | 핵심루프\|전투\|성장\|무기진화\|레벨업\|웨이브\|스테이지\|보스\|난이도\|언락 |
+| `Docs/ARCHITECTURE.md` | 폴더구조\|Assembly\|IDamageable\|IPoolable\|이벤트흐름\|네이밍\|싱글톤\|풀링\|JsonBalance |
+| `Docs/PROGRESS.md` | 마일스톤\|작업상태\|체크리스트\|테스트자동화\|라운드 |
+| `Docs/Design/PREFAB_BUILDER_GUIDELINES.md` | 프리팹생성\|Unity MCP\|컴포넌트설정 |
+| `Docs/Tasks/*.md` | 작업스펙\|완료기준\|blockedBy |
+| `.claude/MULTI_SESSION.md` | 멀티세션\|충돌방지\|파일소유권 |
+| `.claude/USAGE_GUIDE.md` | 사용법\|스킬\|커맨드 |
+
 ## 핵심 규칙
 
 | 항목 | 규칙 |
@@ -133,12 +156,12 @@ Task tool 호출:
 - 선행 조건 (blockedBy)
 - 완료 기준
 
-### ⚠️ 작업 시작 체크리스트 (필수)
+### 작업 시작 체크리스트 (필수)
 
 서브에이전트 실행 **전** 반드시 수행:
 
 ```
-1. [ ] PROGRESS.md 마일스톤 상태 → "🟡 진행 중" 변경
+1. [ ] PROGRESS.md 마일스톤 상태 → "진행 중" 변경
 2. [ ] TASK 문서 생성/갱신
 3. [ ] 서브에이전트 실행
 ```
@@ -161,13 +184,13 @@ Task tool 호출:
 2. 충돌/통합 이슈 해결
 3. 커밋 (필요시)
 
-### ⚠️ 작업 완료 체크리스트 (필수)
+### 작업 완료 체크리스트 (필수)
 
 모든 서브에이전트 완료 **후** 반드시 수행:
 
 ```
 1. [ ] 서브에이전트 결과 확인
-2. [ ] PROGRESS.md 마일스톤 상태 → "✅ 완료" 변경
+2. [ ] PROGRESS.md 마일스톤 상태 → "완료" 변경
 3. [ ] PROGRESS.md 변경 이력 추가
 4. [ ] TASK 문서 상태 갱신
 ```
@@ -212,14 +235,3 @@ Task tool 호출:
 Add feature       ← 영어 (동사 원형)
 - 설명 한국어     ← 본문
 ```
-
-## 참조
-
-| 문서 | 용도 |
-|------|------|
-| `Docs/Design/GDD.md` | **게임 디자인** |
-| `.claude/USAGE_GUIDE.md` | 사용법 가이드 |
-| `Docs/PROGRESS.md` | 작업 상태 |
-| `Docs/ARCHITECTURE.md` | 폴더/의존성 |
-| `Docs/Design/PREFAB_BUILDER_GUIDELINES.md` | 프리팹 생성 지침 |
-| `.claude/MULTI_SESSION.md` | 멀티세션 |
