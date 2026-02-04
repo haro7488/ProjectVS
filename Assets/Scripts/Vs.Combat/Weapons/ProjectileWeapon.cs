@@ -17,6 +17,10 @@ namespace Vs.Combat
         [SerializeField] private bool _isPiercing;
         [SerializeField] private int _pierceCount = 1;
 
+        [Header("Targeting")]
+        [Tooltip("true면 이동 방향으로만 발사 (나이프 등), false면 가장 가까운 적 방향")]
+        [SerializeField] private bool _useMoveDirection;
+
         private Vector3 _lastMoveDirection = Vector3.forward;
 
         #region Public Methods
@@ -73,6 +77,12 @@ namespace Vs.Combat
 
         private Vector3 GetFireDirection()
         {
+            // 이동 방향 모드면 항상 이동 방향 사용
+            if (_useMoveDirection)
+            {
+                return _lastMoveDirection;
+            }
+
             Transform nearestEnemy = FindNearestEnemy();
 
             if (nearestEnemy != null)
