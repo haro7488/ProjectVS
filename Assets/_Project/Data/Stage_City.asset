@@ -19,35 +19,35 @@ MonoBehaviour:
   MapPrefab: {fileID: 0}
   MapSize: {x: 50, y: 50}
   BackgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  Duration: 300
+  Duration: 1200
   Waves:
   - StartTime: 0
     EndTime: -1
     Enemy: {fileID: 11400000, guid: b58c1f713cfc14e4e8c51da3bba0afbc, type: 2}
     SpawnInterval: 2
-    SpawnCount: 1
+    SpawnCount: 2
     SpawnCountGrowth: 0.1
   - StartTime: 180
     EndTime: -1
-    Enemy: {fileID: 11400000, guid: b58c1f713cfc14e4e8c51da3bba0afbc, type: 2}
+    Enemy: {fileID: 11400000, guid: b489637ef2c2043f9870d8b83fceb1ee, type: 2}
     SpawnInterval: 3
     SpawnCount: 1
     SpawnCountGrowth: 0.15
   - StartTime: 420
     EndTime: -1
-    Enemy: {fileID: 11400000, guid: b58c1f713cfc14e4e8c51da3bba0afbc, type: 2}
+    Enemy: {fileID: 11400000, guid: a7b094d2fa8e64cc5a72164473942b46, type: 2}
     SpawnInterval: 5
     SpawnCount: 1
     SpawnCountGrowth: 0.08
   - StartTime: 720
     EndTime: -1
-    Enemy: {fileID: 11400000, guid: b58c1f713cfc14e4e8c51da3bba0afbc, type: 2}
+    Enemy: {fileID: 11400000, guid: f591f6af0d2484f68bccb25606af5548, type: 2}
     SpawnInterval: 4
     SpawnCount: 1
     SpawnCountGrowth: 0.1
   BossSpawns:
   - SpawnTime: 1020
-    Boss: {fileID: 0}
+    Boss: {fileID: 11400000, guid: 2247c22b172db4323afba7b610f602fe, type: 2}
   DifficultyMultiplier: 1
   EnemyHealthGrowth: 0.05
   EnemyDamageGrowth: 0.03
