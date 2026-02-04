@@ -1,11 +1,14 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(timeout:*)",
+      "mcp__UnityMCP__execute_custom_tool",
+      "Bash(grep:*)",
+      "Bash(xargs -I {} sh -c 'echo \"\"=== {} ===\"\" && cat {}')"
+    ]
+  },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "UnityMCP"
-  ],
-  "permissions": {
-    "allow": [
-      "Bash(timeout:*)"
-    ]
-  }
+  ]
 }
