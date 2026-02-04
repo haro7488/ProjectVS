@@ -1,0 +1,29 @@
+{
+    "name": "Vs.Progression.Tests",
+    "rootNamespace": "Vs.Progression.Tests",
+    "references": [
+        "GUID:3afd27ea88b0842b0b9996bedbed4925",
+        "GUID:b3ca3a7861e467a40b0f666e4399a442",
+        "GUID:a3ffeb41fdc3d784ca99134470eb645a",
+        "GUID:af79bcf894c8ec74d816c7c832334e5c",
+        "GUID:bb6b175f74d50014cafa5fc567e60251",
+        "GUID:c59d9c449f5b5c04780a7f47fae2c865",
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:0acc523941302664db1f4e527237feb3"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

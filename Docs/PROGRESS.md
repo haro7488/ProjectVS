@@ -16,6 +16,48 @@
 
 ---
 
+## 테스트 자동화 시스템 ✅ 완료
+
+> 상세: `Docs/Testing/ARCHITECTURE.md`, `Docs/Testing/GUIDE.md`
+
+### 3계층 테스트 아키텍처
+- [x] **Phase 0**: 테스트 문서화 ✅
+  - 아키텍처 문서 (`Docs/Testing/ARCHITECTURE.md`)
+  - 테스트 작성 가이드 (`Docs/Testing/GUIDE.md`)
+  - 시나리오 명세 (`Docs/Testing/SCENARIOS.md`)
+
+- [x] **Phase 1**: 공통 기반 ✅
+  - `Vs.TestUtilities.asmdef`
+  - `TestBase.cs`, `MockFactory.cs`, `AssertExtensions.cs`, `TestConstants.cs`
+
+- [x] **Phase 2**: Edit Mode Tests ✅ (122개 통과)
+  - `Vs.Progression.Tests` - ExperienceManager, LevelUpManager, LevelUpChoice
+  - `Vs.Combat.Tests` - WeaponData, DamageInfo
+  - `Vs.Core.Tests` - Singleton
+  - `Vs.Data.Tests` - BalanceLoader
+
+- [x] **Phase 3**: Play Mode Tests ✅ (80개 통과)
+  - `Vs.Integration.Tests.asmdef`
+  - `PlayModeTestBase.cs`
+  - `GameStateTransitionTests.cs` - 상태 전환 테스트
+  - `GameManagerIntegrationTests.cs` - 이벤트/싱글톤 테스트
+  - `WeaponControllerTests.cs` - 무기 관리 테스트
+  - `LevelUpFlowTests.cs` - 레벨업 플로우 테스트
+
+- [x] **Phase 4**: In-Game Test Runner ✅
+  - `Vs.TestRunner.asmdef`
+  - `TestScenario.cs` - 시나리오 기반 클래스
+  - `TestRunner.cs` - 런타임 테스트 관리
+  - `TestReporter.cs` - 결과 리포트 (Console/JSON/Markdown)
+  - 시나리오 4종: BasicGameplay, Weapon, LevelUp, DifficultyScaling
+
+### 테스트 통계
+- **Edit Mode Tests**: 122개
+- **Play Mode Tests**: 80개
+- **총 테스트 수**: 202개 (모두 통과)
+
+---
+
 ## M2 핵심 루프 ✅ 완료
 
 > 상세: `Docs/Design/Tasks/TASK_M2.md`
@@ -173,9 +215,26 @@
 - `Assets/_Project/Materials/GangsterOrange.mat` (M3)
 - `Assets/_Project/Materials/BossDarkRed.mat` (M3)
 
-### Assembly Definition (9개)
+### Assembly Definition (14개)
 - `Vs.Utility`, `Vs.Core`, `Vs.Data`, `Vs.Combat`
 - `Vs.Player`, `Vs.Enemy`, `Vs.Progression`, `Vs.Meta`, `Vs.UI`
+- `Vs.TestUtilities`, `Vs.Progression.Tests`, `Vs.Combat.Tests`, `Vs.Core.Tests`, `Vs.Data.Tests`
+- `Vs.Integration.Tests`, `Vs.TestRunner`
+
+### 테스트
+- `Assets/Scripts/Tests/TestUtilities/TestBase.cs`
+- `Assets/Scripts/Tests/TestUtilities/MockFactory.cs`
+- `Assets/Scripts/Tests/TestUtilities/AssertExtensions.cs`
+- `Assets/Scripts/Tests/TestUtilities/TestConstants.cs`
+- `Assets/Scripts/Tests/EditMode/Vs.Progression.Tests/*.cs`
+- `Assets/Scripts/Tests/EditMode/Vs.Combat.Tests/*.cs`
+- `Assets/Scripts/Tests/EditMode/Vs.Core.Tests/*.cs`
+- `Assets/Scripts/Tests/EditMode/Vs.Data.Tests/*.cs`
+- `Assets/Scripts/Tests/PlayMode/Vs.Integration.Tests/*.cs`
+- `Assets/Scripts/Tests/InGame/TestRunner.cs`
+- `Assets/Scripts/Tests/InGame/TestScenario.cs`
+- `Assets/Scripts/Tests/InGame/TestReporter.cs`
+- `Assets/Scripts/Tests/InGame/Scenarios/*.cs`
 
 ---
 
@@ -193,3 +252,4 @@
 | 2026-01-28 | UI 시스템 구현 - Core/HUD/Popup 컴포넌트 12개, Canvas 구조 |
 | 2026-02-04 | M2 완료 - 진화 시스템, UI 연동, SO 설정 |
 | 2026-02-04 | M3 시작 - 적 4종, 무기 5종 구현 완료 (M3-a, M3-b) |
+| 2026-02-04 | 테스트 자동화 시스템 완료 - 3계층 테스트 (202개 테스트) |
