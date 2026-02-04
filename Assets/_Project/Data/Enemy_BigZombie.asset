@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c140cc0a01793bc4ab2b3b8439fe9cdf, type: 3}
+  m_Name: Enemy_BigZombie
+  m_EditorClassIdentifier: 
+  Id: big_zombie
+  DisplayName: "\uB300\uD615 \uC880\uBE44"
+  Sprite: {fileID: 0}
+  Animator: {fileID: 0}
+  Prefab: {fileID: 3247253742956310580, guid: 4adb5ff5f2655404a9c00c2aa6682b2f, type: 3}
+  MaxHealth: 50
+  MoveSpeed: 1.2
+  ContactDamage: 25
+  AttackCooldown: 1.2
+  Behavior: 0
+  ExpValue: 5
+  GoldValue: 1
+  GoldDropChance: 0.2
+  Scale: 1.5
+  ColliderRadius: 0.75
+  IsBoss: 0
+  BossHealthMultiplier: 10

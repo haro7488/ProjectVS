@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c140cc0a01793bc4ab2b3b8439fe9cdf, type: 3}
+  m_Name: Enemy_FastZombie
+  m_EditorClassIdentifier: 
+  Id: fast_zombie
+  DisplayName: "\uB6F0\uB294 \uC880\uBE44"
+  Sprite: {fileID: 0}
+  Animator: {fileID: 0}
+  Prefab: {fileID: 1299236688053826597, guid: 306fdab2964a64edd9f3ffb2998bc152, type: 3}
+  MaxHealth: 5
+  MoveSpeed: 4
+  ContactDamage: 8
+  AttackCooldown: 1
+  Behavior: 0
+  ExpValue: 2
+  GoldValue: 0
+  GoldDropChance: 0.12
+  Scale: 0.9
+  ColliderRadius: 0.4
+  IsBoss: 0
+  BossHealthMultiplier: 10
