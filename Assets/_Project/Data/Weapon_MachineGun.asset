@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 580a7eec3242247479dd16af4048380c, type: 3}
-  m_Name: Weapon_Pistol
+  m_Name: Weapon_MachineGun
   m_EditorClassIdentifier: 
-  Id: pistol
-  DisplayName: "\uAD8C\uCD1D"
-  Description: 
+  Id: weapon_machinegun
+  DisplayName: "\uAE30\uAD00\uCD1D"
+  Description: "\uAD8C\uCD1D\uC758 \uC9C4\uD654\uD615. \uBE60\uB978 \uC5F0\uC0AC\uC640
+    \uB2E4\uC218\uC758 \uD22C\uC0AC\uCCB4."
   Icon: {fileID: 0}
   WeaponPrefab: {fileID: 3903179347767052544, guid: a0821531968ab0044b0d899838b949fb,
     type: 3}
   ProjectilePrefab: {fileID: 6753271187091175294, guid: c53193115cd4d244e8f401c311a446b3,
     type: 3}
   Type: 0
-  BaseDamage: 10
-  BaseInterval: 1
-  BaseProjectileCount: 1
+  BaseDamage: 15
+  BaseInterval: 0.15
+  BaseProjectileCount: 3
   BaseArea: 1
   BaseDuration: 0
   BaseSpeed: 15
-  EvolvesTo: {fileID: 11400000, guid: cf00faa73b2a8490b91cbee144e063ed, type: 2}
-  EvolutionRequirement: {fileID: 11400000, guid: ec3edd61b1eab45098fd679fdde1a76a,
-    type: 2}
-  IsEvolved: 0
+  EvolvesTo: {fileID: 0}
+  EvolutionRequirement: {fileID: 0}
+  IsEvolved: 1
   ProjectileColor: {r: 1, g: 1, b: 1, a: 1}

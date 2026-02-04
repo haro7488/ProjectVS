@@ -141,6 +141,68 @@ namespace Vs.Combat
         }
 
         /// <summary>
+        /// 무기를 진화시킵니다 (기존 무기를 새 무기로 교체).
+        /// </summary>
+        /// <returns>교체 성공 여부</returns>
+        public bool ReplaceWeapon(WeaponData oldData, WeaponData newData)
+        {
+            if (oldData == null || newData == null)
+            {
+                Debug.LogWarning("[WeaponController] Cannot replace with null weapon data");
+                return false;
+            }
+
+            var oldWeapon = GetWeapon(oldData.Id);
+            if (oldWeapon == null)
+            {
+                Debug.LogWarning($"[WeaponController] Cannot replace, weapon not found: {oldData.Id}");
+                return false;
+            }
+
+            // 무기 프리팹 확인
+            if (newData.WeaponPrefab == null)
+            {
+                Debug.LogWarning($"[WeaponController] New weapon {newData.Id} has no prefab");
+                return false;
+            }
+
+            // 기존 무기 위치 저장
+            int index = _weapons.IndexOf(oldWeapon);
+
+            // 기존 무기 제거
+            _weapons.Remove(oldWeapon);
+            Destroy(oldWeapon.gameObject);
+
+            // 새 무기 인스턴스화
+            var weaponObj = Instantiate(newData.WeaponPrefab, _weaponContainer);
+            weaponObj.name = $"Weapon_{newData.Id}";
+
+            var newWeapon = weaponObj.GetComponent<WeaponBase>();
+
+            if (newWeapon == null)
+            {
+                Debug.LogError($"[WeaponController] Weapon prefab {newData.Id} has no WeaponBase component");
+                Destroy(weaponObj);
+                return false;
+            }
+
+            newWeapon.Initialize(_owner, newData);
+
+            // 같은 위치에 삽입
+            if (index >= 0 && index <= _weapons.Count)
+            {
+                _weapons.Insert(index, newWeapon);
+            }
+            else
+            {
+                _weapons.Add(newWeapon);
+            }
+
+            Debug.Log($"[WeaponController] Evolved weapon: {oldData.Id} -> {newData.Id}");
+            return true;
+        }
+
+        /// <summary>
         /// 무기를 제거합니다.
         /// </summary>
         public bool RemoveWeapon(string weaponId)

@@ -31,6 +31,7 @@ namespace Vs.Progression
         public event Action<WeaponData, int> OnWeaponUpgraded;
         public event Action<PassiveData, int> OnPassiveAdded;
         public event Action<PassiveData, int> OnPassiveUpgraded;
+        public event Action<WeaponData, WeaponData> OnWeaponEvolved; // (원본, 진화)
 
         // 프로퍼티
         public IReadOnlyList<WeaponData> OwnedWeapons => _ownedWeapons;
@@ -107,6 +108,21 @@ namespace Vs.Progression
                 candidates.Add(CreatePassiveChoice(passive, false));
             }
 
+            // 무기 진화 후보 (우선순위 높음 - 리스트 앞에 삽입)
+            var evolutionCandidates = new List<LevelUpChoice>();
+            foreach (var weapon in _ownedWeapons)
+            {
+                if (!CanEvolveWeapon(weapon)) continue;
+
+                evolutionCandidates.Add(CreateEvolutionChoice(weapon));
+            }
+
+            // 진화 선택지가 있으면 일반 후보 앞에 배치 (우선 표시)
+            if (evolutionCandidates.Count > 0)
+            {
+                candidates.InsertRange(0, evolutionCandidates);
+            }
+
             // 랜덤하게 선택
             Shuffle(candidates);
             for (int i = 0; i < count && i < candidates.Count; i++)
@@ -156,6 +172,10 @@ namespace Vs.Progression
 
                 case LevelUpChoice.ChoiceType.PassiveUpgrade:
                     UpgradePassive(choice.Data as PassiveData);
+                    break;
+
+                case LevelUpChoice.ChoiceType.WeaponEvolution:
+                    EvolveWeapon(choice.SourceData as WeaponData, choice.Data as WeaponData);
                     break;
             }
 
@@ -259,6 +279,61 @@ namespace Vs.Progression
             _passiveLevels[passive.Id] = newLevel;
 
             OnPassiveUpgraded?.Invoke(passive, newLevel);
+        }
+
+        /// <summary>
+        /// 무기를 진화시킵니다.
+        /// </summary>
+        private void EvolveWeapon(WeaponData sourceWeapon, WeaponData evolvedWeapon)
+        {
+            if (sourceWeapon == null || evolvedWeapon == null) return;
+            if (!_ownedWeapons.Contains(sourceWeapon)) return;
+
+            // 원본 무기 제거
+            int index = _ownedWeapons.IndexOf(sourceWeapon);
+            _ownedWeapons.RemoveAt(index);
+            _weaponLevels.Remove(sourceWeapon.Id);
+
+            // 진화 무기 추가 (같은 위치에)
+            _ownedWeapons.Insert(index, evolvedWeapon);
+            _weaponLevels[evolvedWeapon.Id] = 1; // 진화 무기는 Lv.1로 시작
+
+            OnWeaponEvolved?.Invoke(sourceWeapon, evolvedWeapon);
+
+            if (_debugMode)
+            {
+                Debug.Log($"[LevelUpManager] Evolved {sourceWeapon.DisplayName} -> {evolvedWeapon.DisplayName}");
+            }
+        }
+
+        /// <summary>
+        /// 무기 진화 가능 여부 확인.
+        /// 조건: Lv.8 + 대응 패시브 보유
+        /// </summary>
+        public bool CanEvolveWeapon(WeaponData weapon)
+        {
+            if (weapon == null || !weapon.CanEvolve) return false;
+            if (GetWeaponLevel(weapon) < Constants.MaxWeaponLevel) return false;
+            if (!HasPassive(weapon.EvolutionRequirement)) return false;
+
+            return true;
+        }
+
+        private LevelUpChoice CreateEvolutionChoice(WeaponData sourceWeapon)
+        {
+            var evolvedWeapon = sourceWeapon.EvolvesTo;
+
+            string description = $"진화!\n{sourceWeapon.DisplayName} + {sourceWeapon.EvolutionRequirement.DisplayName}";
+
+            return new LevelUpChoice(
+                LevelUpChoice.ChoiceType.WeaponEvolution,
+                evolvedWeapon,
+                1,
+                evolvedWeapon.DisplayName,
+                description,
+                evolvedWeapon.Icon,
+                sourceWeapon
+            );
         }
 
         public int GetWeaponLevel(WeaponData weapon)

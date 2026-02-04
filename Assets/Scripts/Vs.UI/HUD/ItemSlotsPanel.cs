@@ -40,6 +40,7 @@ namespace Vs.UI
                 var manager = LevelUpManager.Instance;
                 manager.OnWeaponAdded += HandleWeaponAdded;
                 manager.OnWeaponUpgraded += HandleWeaponUpgraded;
+                manager.OnWeaponEvolved += HandleWeaponEvolved;
                 manager.OnPassiveAdded += HandlePassiveAdded;
                 manager.OnPassiveUpgraded += HandlePassiveUpgraded;
             }
@@ -52,6 +53,7 @@ namespace Vs.UI
                 var manager = LevelUpManager.Instance;
                 manager.OnWeaponAdded -= HandleWeaponAdded;
                 manager.OnWeaponUpgraded -= HandleWeaponUpgraded;
+                manager.OnWeaponEvolved -= HandleWeaponEvolved;
                 manager.OnPassiveAdded -= HandlePassiveAdded;
                 manager.OnPassiveUpgraded -= HandlePassiveUpgraded;
             }
@@ -75,6 +77,22 @@ namespace Vs.UI
             if (_weaponSlotMap.TryGetValue(weapon.Id, out int slotIndex))
             {
                 _weaponSlots[slotIndex].UpdateLevel(level);
+            }
+        }
+
+        private void HandleWeaponEvolved(WeaponData oldWeapon, WeaponData newWeapon)
+        {
+            if (oldWeapon == null || newWeapon == null) return;
+
+            // 기존 무기의 슬롯 찾기
+            if (_weaponSlotMap.TryGetValue(oldWeapon.Id, out int slotIndex))
+            {
+                // 매핑 업데이트
+                _weaponSlotMap.Remove(oldWeapon.Id);
+                _weaponSlotMap[newWeapon.Id] = slotIndex;
+
+                // 슬롯 UI 업데이트 (진화 무기는 Lv.1로 시작)
+                _weaponSlots[slotIndex].SetItem(newWeapon.Icon, 1);
             }
         }
 

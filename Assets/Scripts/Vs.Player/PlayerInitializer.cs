@@ -51,6 +51,7 @@ namespace Vs.Player
                 LevelUpManager.Instance.OnWeaponUpgraded += HandleWeaponUpgraded;
                 LevelUpManager.Instance.OnPassiveAdded += HandlePassiveAdded;
                 LevelUpManager.Instance.OnPassiveUpgraded += HandlePassiveUpgraded;
+                LevelUpManager.Instance.OnWeaponEvolved += HandleWeaponEvolved;
             }
         }
 
@@ -67,6 +68,7 @@ namespace Vs.Player
                 LevelUpManager.Instance.OnWeaponUpgraded -= HandleWeaponUpgraded;
                 LevelUpManager.Instance.OnPassiveAdded -= HandlePassiveAdded;
                 LevelUpManager.Instance.OnPassiveUpgraded -= HandlePassiveUpgraded;
+                LevelUpManager.Instance.OnWeaponEvolved -= HandleWeaponEvolved;
             }
         }
 
@@ -143,6 +145,19 @@ namespace Vs.Player
                 if (_debugMode)
                 {
                     Debug.Log($"[PlayerInitializer] Passive upgraded: {passive.DisplayName} Lv.{level}");
+                }
+            }
+        }
+
+        private void HandleWeaponEvolved(WeaponData oldWeapon, WeaponData newWeapon)
+        {
+            if (_weaponController != null && oldWeapon != null && newWeapon != null)
+            {
+                _weaponController.ReplaceWeapon(oldWeapon, newWeapon);
+
+                if (_debugMode)
+                {
+                    Debug.Log($"[PlayerInitializer] Weapon evolved: {oldWeapon.DisplayName} -> {newWeapon.DisplayName}");
                 }
             }
         }
