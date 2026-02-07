@@ -4,7 +4,8 @@
       "Bash(timeout:*)",
       "mcp__UnityMCP__execute_custom_tool",
       "Bash(grep:*)",
-      "Bash(xargs -I {} sh -c 'echo \"\"=== {} ===\"\" && cat {}')"
+      "Bash(xargs -I {} sh -c 'echo \"\"=== {} ===\"\" && cat {}')",
+      "Bash(brew install:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

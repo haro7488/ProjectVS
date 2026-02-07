@@ -285,6 +285,60 @@ namespace Vs.Enemy
             _player = player;
         }
 
+        /// <summary>
+        /// 지정 위치에 적 스폰 (디버그용).
+        /// </summary>
+        public void SpawnEnemyAt(EnemyData enemyData, Vector3 position, bool isBoss = false)
+        {
+            if (enemyData == null || enemyData.Prefab == null)
+            {
+                Debug.LogWarning("[EnemySpawner] Invalid enemy data or missing prefab!");
+                return;
+            }
+
+            // 풀에서 스폰
+            GameObject enemyObj;
+            if (PoolManager.HasInstance)
+            {
+                enemyObj = PoolManager.Instance.Spawn(enemyData.Prefab, position, Quaternion.identity);
+            }
+            else
+            {
+                enemyObj = Instantiate(enemyData.Prefab, position, Quaternion.identity);
+            }
+
+            // 초기화 (난이도 배율 1.0)
+            var enemy = enemyObj.GetComponent<EnemyBase>();
+            if (enemy != null)
+            {
+                float healthMult = isBoss && enemyData.BossHealthMultiplier > 0 ? enemyData.BossHealthMultiplier : 1f;
+                enemy.Initialize(enemyData, _player, healthMult, 1f);
+            }
+
+            _activeEnemyCount++;
+        }
+
+        /// <summary>
+        /// 모든 활성 적 제거 (디버그용).
+        /// </summary>
+        public void KillAllEnemies()
+        {
+            var enemies = FindObjectsByType<EnemyBase>(FindObjectsSortMode.None);
+            foreach (var enemy in enemies)
+            {
+                if (enemy != null && !enemy.IsDead)
+                {
+                    enemy.TakeDamage(new Combat.DamageInfo(99999f));
+                }
+            }
+            Debug.Log($"[EnemySpawner] Killed {enemies.Length} enemies");
+        }
+
+        /// <summary>
+        /// 스폰 활성화 여부.
+        /// </summary>
+        public bool IsSpawning => _isSpawning;
+
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {

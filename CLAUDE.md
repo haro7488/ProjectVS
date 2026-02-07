@@ -27,6 +27,7 @@ Unity API, 프로젝트 패턴, 아키텍처 관련 작업 시:
 | `Docs/ARCHITECTURE.md` | 폴더구조\|Assembly\|IDamageable\|IPoolable\|이벤트흐름\|네이밍\|싱글톤\|풀링\|JsonBalance |
 | `Docs/PROGRESS.md` | 마일스톤\|작업상태\|체크리스트\|테스트자동화\|라운드 |
 | `Docs/Design/PREFAB_BUILDER_GUIDELINES.md` | 프리팹생성\|Unity MCP\|컴포넌트설정 |
+| `Docs/Design/UNITY_MCP_UI_GUIDELINES.md` | RectTransform\|앵커\|UI위치\|anchoredPosition\|중앙배치 |
 | `Docs/Tasks/*.md` | 작업스펙\|완료기준\|blockedBy |
 | `.claude/MULTI_SESSION.md` | 멀티세션\|충돌방지\|파일소유권 |
 | `.claude/USAGE_GUIDE.md` | 사용법\|스킬\|커맨드 |
@@ -89,6 +90,9 @@ Task tool 호출:
 - 스크립트 컴파일 완료 후 컴포넌트 추가 가능
 - 프리팹 GUID는 `manage_asset(action="get_info")`로 조회
 - Physics2D 충돌 매트릭스는 수동 설정 필요
+- **UI 프리팹 인스턴스화 후 RectTransform 검증 필수**
+  - 중앙 배치: anchoredPosition이 (0, 0)인지 확인
+  - 상세: `Docs/Design/UNITY_MCP_UI_GUIDELINES.md`
 
 ## 서브에이전트 위임
 

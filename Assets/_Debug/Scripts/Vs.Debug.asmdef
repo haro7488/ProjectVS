@@ -1,0 +1,24 @@
+{
+    "name": "Vs.Debug",
+    "rootNamespace": "Vs.Debug",
+    "references": [
+        "Vs.Utility",
+        "Vs.Core",
+        "Vs.Data",
+        "Vs.Combat",
+        "Vs.Player",
+        "Vs.Enemy",
+        "Vs.Progression",
+        "Vs.UI",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

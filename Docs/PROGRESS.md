@@ -1,5 +1,35 @@
 # ProjectVS - 진행 상황
 
+## 디버그 패널 시스템 ✅ 완료
+
+> F1 키로 토글, 시각적 기능 검증용
+
+### 구성
+- [x] Round 1: 기반 구축 (DebugController, DebugPanel, DebugTabBase)
+- [x] Round 2: 탭 구현 (Weapon, Enemy, Level, Spawn, Stats, Cheat)
+- [x] Round 3: Unity 에셋 (프리팹, EnemySpawner 확장)
+- [x] Round 4: GameScene 통합
+
+### 키보드 단축키
+| 키 | 기능 |
+|----|------|
+| F1 | 패널 토글 |
+| F2 | 갓모드 토글 |
+| F3 | 시간 배속 순환 |
+| F4 | 레벨업 트리거 |
+
+### 파일 구조
+```
+Assets/_Debug/
+├── Scripts/ (Vs.Debug.asmdef)
+│   ├── DebugController.cs, DebugPanel.cs, DebugTabBase.cs
+│   └── Tabs/ (6개 탭)
+├── Prefabs/ (DebugPanel, DebugActionButton, DebugTabButton)
+└── README.md
+```
+
+---
+
 ## 현재 단계: M3 콘텐츠 ✅ 완료
 
 > 상세: `Docs/Design/Tasks/TASK_M3.md`
@@ -254,3 +284,4 @@
 | 2026-02-04 | M3 시작 - 적 4종, 무기 5종 구현 완료 (M3-a, M3-b) |
 | 2026-02-04 | 테스트 자동화 시스템 완료 - 3계층 테스트 (202개 테스트) |
 | 2026-02-04 | M3 완료 - 스테이지 웨이브 구성, 프리팹/SO 연결, WeaponPool 등록 |
+| 2026-02-04 | 디버그 패널 시스템 완료 - 6개 탭, F1 토글, 시각적 기능 검증 |

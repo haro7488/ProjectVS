@@ -66,7 +66,7 @@ namespace Vs.Editor
             EditorUtility.SetDirty(material);
             AssetDatabase.SaveAssets();
 
-            Debug.Log("[CheckerTextureGenerator] Created checker ground material at: " + materialPath);
+            UnityEngine.Debug.Log("[CheckerTextureGenerator] Created checker ground material at: " + materialPath);
 
             // Ground 오브젝트에 적용
             var ground = GameObject.Find("Ground");
@@ -76,7 +76,7 @@ namespace Vs.Editor
                 if (renderer != null)
                 {
                     renderer.sharedMaterial = material;
-                    Debug.Log("[CheckerTextureGenerator] Applied to Ground object");
+                    UnityEngine.Debug.Log("[CheckerTextureGenerator] Applied to Ground object");
                 }
             }
         }
